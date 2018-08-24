@@ -1,0 +1,1 @@
+const stringToNumber = s => +s;
