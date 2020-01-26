@@ -95,7 +95,7 @@ pred-odd 1 _ = refl
 pred-odd (suc (suc (suc n))) e = pred-odd (suc n) e
 
 even? : ∀ n → Dec (even n ≡ true)
-even? zero = yes refl
+even? 0 = yes refl
 even? 1 = no (λ ())
 even? (suc (suc n)) = even? n
 
