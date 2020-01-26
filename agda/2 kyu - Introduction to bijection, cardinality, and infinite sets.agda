@@ -86,7 +86,7 @@ even-not-odd 0 = λ ()
 even-not-odd (suc n) = even-not-odd n
 
 ≠true : ∀ n → even n ≢ true → even n ≡ false
-≠true zero ¬e = ⊥-elim (¬e refl)
+≠true 0 ¬e = ⊥-elim (¬e refl)
 ≠true 1 _ = refl
 ≠true (suc (suc n)) ¬e = ≠true n ¬e
 
