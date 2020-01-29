@@ -1,0 +1,1 @@
+deck_of_cards = lambda: [f'{rank} of {suit}' for rank in ['ace', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten', 'jack', 'queen', 'king'] for suit in ['hearts', 'spades', 'diamonds', 'clubs']]
