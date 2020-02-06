@@ -4,22 +4,11 @@ module ALaCarte where
 
 data Expr f = In (f (Expr f))
 
-data Lit a = Lit Int
-data Add a = Add a a
+data Lit a = Lit Int deriving Functor
+data Add a = Add a a deriving Functor
 
-data (f :+: g) e = Inl (f e) | Inr (g e)
+data (f :+: g) e = Inl (f e) | Inr (g e) deriving Functor
 infixr 1 :+:
-
-
-instance Functor Lit where
-  fmap _ (Lit n) = Lit n
-
-instance Functor Add where
-  fmap f (Add m n) = Add (f m) (f n)
-
-instance (Functor f, Functor g) => Functor (f :+: g) where
-  fmap f (Inl a) = Inl $ f <$> a
-  fmap f (Inr b) = Inr $ f <$> b
 
 foldExpr :: Functor f => (f a -> a) -> Expr f -> a
 foldExpr f (In e) = f $ foldExpr f <$> e
