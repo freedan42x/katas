@@ -1,17 +1,11 @@
 module MiniStringFuck where
 
-format :: String -> String
-format "" = []
-format ('+' : xs) = "+" ++ format xs
-format ('.' : xs) = "." ++ format xs
-format (_   : xs) = format xs 
 
 myFirstInterpreter :: String -> String
-myFirstInterpreter s = f (format s) 0
-
-f :: String -> Int -> String
-f "" _ = []
-f ('+' : xs) n
-  | n == 256  = f xs 1
-  | otherwise = f xs (n + 1)
-f ('.' : xs) n = [toEnum n] ++ f xs n
+myFirstInterpreter = f 0
+  where
+    f _   ""       = ""
+    f n   ('.':xs) = toEnum n : f n xs
+    f 255 ('+':xs) = f 0 xs
+    f n   ('+':xs) = f (n + 1) xs
+    f n   (_:xs)   = f n xs
