@@ -9,9 +9,9 @@ module Imperative
   )
 where
 
-import           Data.Bool
 import           Data.IORef
 import           System.IO.Unsafe
+import           Control.Monad
 
 
 type Lang = IO
@@ -27,7 +27,7 @@ lit :: a -> Var a
 lit = unsafePerformIO . newIORef
 
 while :: Var a -> (a -> Bool) -> Lang () -> Lang ()
-while v p act = readIORef v >>= bool mempty (act >> while v p act) . p
+while v p act = readIORef v >>= \x -> when (p x) $ act >> while v p act
 
 binOp :: (a -> a -> a) -> Var a -> Var a -> Lang ()
 binOp f v1 v2 = readIORef v2 >>= modifyIORef v1 . flip f
