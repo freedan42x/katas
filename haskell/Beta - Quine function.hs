@@ -1,0 +1,1 @@
+module Quine where import Text.Printf; quine :: String; quine = let c = 34 :: Int; s = "module Quine where import Text.Printf; quine :: String; quine = let c = 34 :: Int; s = %c%s%c in printf s c s c" in printf s c s c
